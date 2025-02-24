@@ -14,7 +14,7 @@ public class UsuarioController {
 
     @GetMapping("/teste")
     public String teste() {
-        return "TESTE"
+        return "TESTE";
     }
 
     @GetMapping

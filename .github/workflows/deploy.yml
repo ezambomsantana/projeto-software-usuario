@@ -38,3 +38,15 @@ jobs:
         file: ./Dockerfile
         push: true
         tags: jpqv/usuario-ci:${{ github.sha }}
+
+    - name: executing remote ssh commands using password
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST_TEST }}
+        username: "ubuntu"
+        key: ${{ secrets.KEY_TEST }}
+        port: 22
+        script: |
+          docker stop usuario
+          docker rm --force usuario
+          docker run -d -p 8080:8080 --name usuario jpqv/usuario-ci:${{ github.sha }}

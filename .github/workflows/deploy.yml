@@ -25,7 +25,7 @@ jobs:
     - name: Login to Docker Hub
       uses: docker/login-action@v3
       with:
-        username: "ezambomsantana"
+        username: "joaofaraco05"
         password: ${{ secrets.DOCKERHUB_TOKEN }}
     
     - name: Set up Docker Buildx
@@ -37,7 +37,7 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: ezambomsantana/usuario-ci:${{ github.sha }}
+        tags: joaofaraco05/usuario-ci:${{ github.sha }}
 
     - name: executing remote ssh commands using password
       uses: appleboy/ssh-action@master
@@ -49,4 +49,4 @@ jobs:
         script: |
           docker stop usuario
           docker rm --force usuario
-          docker run -d -p 8080:8080 --name usuario --network=rede ezambomsantana/usuario-ci:${{ github.sha }}
+          docker run -d -p 8080:8080 --name usuario --network=rede joaofaraco05/usuario-ci:${{ github.sha }}

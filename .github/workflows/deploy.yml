@@ -7,7 +7,6 @@
 # documentation.
 
 name: Java CI with Maven
-
 on:
   push:
     branches: [ "main" ]
@@ -26,6 +25,7 @@ jobs:
         java-version: '21'
         distribution: 'temurin'
         cache: maven
+        
     - name: Build with Maven
       run: mvn -B package --file pom.xml
 
@@ -37,7 +37,6 @@ jobs:
       
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3
-      
     - name: Build and push
       uses: docker/build-push-action@v5
       with:

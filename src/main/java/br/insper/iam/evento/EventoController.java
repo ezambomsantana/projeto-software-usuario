@@ -13,8 +13,8 @@ public class EventoController {
     private EventoService eventoService;
 
     @GetMapping
-    public List<Evento> getEventos(@RequestParam(required = false) String tipo) {
-        return eventoService.getEventos(tipo);
+    public List<Evento> getUsuarios() {
+        return eventoService.getEventos();
     }
 
     @PostMapping

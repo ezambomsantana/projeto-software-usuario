@@ -12,10 +12,7 @@ public class EventoService {
     @Autowired
     private EventoRepository eventoRepository;
 
-    public List<Evento> getEventos(String tipo) {
-        if (tipo == null) {
-            return eventoRepository.findByTipo(tipo);
-        }
+    public List<Evento> getEventos() {
         return eventoRepository.findAll();
     }
 

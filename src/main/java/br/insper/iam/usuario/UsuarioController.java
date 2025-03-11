@@ -12,6 +12,11 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
+    @GetMapping("/teste")
+    public String teste() {
+        return "TESTE";
+    }
+
     @GetMapping
     public List<Usuario> getUsuarios() {
         return usuarioService.getUsuarios();
@@ -25,15 +30,5 @@ public class UsuarioController {
     @PostMapping
     public Usuario saveUsuario(@RequestBody Usuario usuario) {
         return usuarioService.saveUsuario(usuario);
-    }
-
-    @DeleteMapping("/{email}")
-    public void deleteUsuario(@PathVariable String email) {
-        usuarioService.deleteUsuario(email);
-    }
-
-    @GetMapping("/usuario/count")
-    public CountUsuarioDTO countUsuario() {
-        return usuarioService.countUsuarios();
     }
 }

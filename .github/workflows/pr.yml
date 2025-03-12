@@ -50,3 +50,12 @@ jobs:
           git fetch --all
           git checkout ${{ github.head_ref }} 
           git add .github/badges
+
+          if git diff --cached --quiet; then
+            echo "Nenhuma mudança detectada no badge. Pulando commit."
+            exit 0
+          fi
+          git commit -m "Atualizando badge de cobertura de testes"
+          git push origin ${{ github.head_ref }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

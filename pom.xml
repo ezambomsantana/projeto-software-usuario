@@ -28,6 +28,7 @@
 	</scm>
 	<properties>
 		<java.version>21</java.version>
+		<project.test.result.directory>${project.build.directory}/test-results</project.test.result.directory>
 	</properties>
 	<dependencies>
 		<dependency>

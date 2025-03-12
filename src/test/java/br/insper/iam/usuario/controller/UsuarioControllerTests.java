@@ -12,6 +12,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -41,7 +42,7 @@ public class UsuarioControllerTests {
     }
 
     @Test
-    void testGetUsuarios() throws Exception {
+    void test_GetUsuarios() throws Exception {
         List<Usuario> usuarios = Arrays.asList(
                 new Usuario("João", "joao@example.com"),
                 new Usuario("Maria", "maria@example.com")
@@ -54,5 +55,24 @@ public class UsuarioControllerTests {
         mockMvc.perform(MockMvcRequestBuilders.get("/api/usuario"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().json(objectMapper.writeValueAsString(usuarios)));
+    }
+
+    @Test
+    void test_PostUsuario() throws Exception {
+
+        Usuario usuario = new Usuario();
+        usuario.setEmail("a@a.com");
+        usuario.setNome("Teste");
+
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        Mockito.when(usuarioService.saveUsuario(usuario)).thenReturn(usuario);
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/usuario")
+                        .content(objectMapper.writeValueAsString(usuario))
+                        .contentType(MediaType.APPLICATION_JSON)
+                )
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().json(objectMapper.writeValueAsString(usuario)));
     }
 }

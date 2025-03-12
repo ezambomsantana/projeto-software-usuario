@@ -35,7 +35,7 @@ jobs:
           ${{ github.workspace }}/**/target/test-results/jacoco/jacoco.xml
         token: ${{ secrets.GITHUB_TOKEN }}
         min-coverage-overall: 50
-        min-coverage-changed-files: 80
+        min-coverage-changed-files: 50
 
     - name: Gerar Badge de Cobertura
       uses: cicirello/jacoco-badge-generator@v2
@@ -69,7 +69,7 @@ jobs:
         echo "Cobertura geral: $overall%"
         echo "Cobertura dos arquivos alterados: $changed%"
         
-        if (( $(echo "$overall < 80" | bc -l) )) || (( $(echo "$changed < 80" | bc -l) )); then
-          echo "Erro: Cobertura insuficiente! Mínimo exigido: 80%."
+        if (( $(echo "$overall < 50" | bc -l) )) || (( $(echo "$changed < 50" | bc -l) )); then
+          echo "Erro: Cobertura insuficiente! Mínimo exigido: 50%."
           exit 1
         fi

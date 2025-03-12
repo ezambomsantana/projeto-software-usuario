@@ -33,4 +33,8 @@ public class Usuario {
         this.email = email;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        return this.email.equals(((Usuario) obj).getEmail());
+    }
 }

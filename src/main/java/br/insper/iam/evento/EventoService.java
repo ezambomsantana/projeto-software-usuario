@@ -14,7 +14,7 @@ public class EventoService {
 
     public List<Evento> getEventos(String tipo) {
         if (tipo == null) {
-            return eventoRepository.findByTipo(tipo);
+            return eventoRepository.findByAcao(tipo);
         }
         return eventoRepository.findAll();
     }

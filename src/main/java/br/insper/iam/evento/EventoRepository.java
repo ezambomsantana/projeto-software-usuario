@@ -7,5 +7,5 @@ import java.util.List;
 
 @Repository
 public interface EventoRepository extends MongoRepository<Evento, String> {
-    List<Evento> findByTipo(String tipo);
+    List<Evento> findByAcao(String acao);
 }

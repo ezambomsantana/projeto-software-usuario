@@ -40,8 +40,7 @@ public class UsuarioServiceTests {
     }
 
     @Test
-
-    void test_saveUsuarioSuccessfully(){
+    void test_saveUsuarioSuccessfully() {
         Usuario usuario = new Usuario();
         usuario.setEmail("a@a.com");
         usuario.setNome("Teste");
@@ -55,7 +54,7 @@ public class UsuarioServiceTests {
     }
 
     @Test
-    void test_saveUsuarioErrorEmailIsNull(){
+    void test_saveUsuarioErrorEmailIsNull() {
         Usuario usuario = new Usuario();
         usuario.setNome("Teste");
 
@@ -63,18 +62,6 @@ public class UsuarioServiceTests {
         Assertions.assertEquals(HttpStatus.BAD_REQUEST, exception.getStatusCode());
     }
 
-    @Test
-    void test_saveUsuarioErrorEmailIsNull() {
-
-        Usuario usuario = new Usuario();
-        usuario.setNome("a@a.com");
-
-        ResponseStatusException exception = Assertions.assertThrows(
-                ResponseStatusException.class,
-                () -> usuarioService.saveUsuario(usuario));
-        Assertions.assertEquals(HttpStatus.BAD_REQUEST, exception.getStatusCode());
-
-    }
 
     @Test
     void test_saveUsuarioErrorNomeIsNull() {
@@ -141,3 +128,4 @@ public class UsuarioServiceTests {
         CountUsuarioDTO countUsuarioDTO = usuarioService.countUsuarios();
         Assertions.assertEquals(10l, countUsuarioDTO.count());
     }
+}

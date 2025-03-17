@@ -26,4 +26,14 @@ public class UsuarioController {
     public Usuario saveUsuario(@RequestBody Usuario usuario) {
         return usuarioService.saveUsuario(usuario);
     }
+
+    @DeleteMapping("/{email}")
+    public void deleteUsuario(@PathVariable String email) {
+        usuarioService.deleteUsuario(email);
+    }
+
+    @GetMapping("/usuario/count")
+    public CountUsuarioDTO countUsuario() {
+        return usuarioService.countUsuarios();
+    }
 }

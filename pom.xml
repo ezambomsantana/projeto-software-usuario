@@ -8,6 +8,7 @@
 		<version>3.4.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
+
 	
 	<groupId>br.insper</groupId>
 	<artifactId>usuario</artifactId>

@@ -49,4 +49,9 @@ jobs:
         script: |
           docker stop usuario
           docker rm --force usuario
-          docker run -d -p 8080:8080 -e USER_DB=${{ secrets.USER_DB }} -e NAME_DB=${{ secrets.NAME_DB }} -e PATH_DB=${{secrets.PATH.DB}} -e PASS_DB=${{secrets.PASS_DB}} --name usuario --network=rede ezambomsantana/usuario-ci:${{ github.sha }}
+          docker run -d -p 8080:8080 \
+            -e USER_DB=${{ secrets.USER_DB }} \
+            -e PASS_DB=${{ secrets.PASS_DB }} \
+            -e PATH_DB=${{ secrets.PATH_DB }} \
+            -e NAME_DB=${{ secrets.NAME_DB }} \
+            --name usuario --network=rede ezambomsantana/usuario-ci:${{ github.sha }}

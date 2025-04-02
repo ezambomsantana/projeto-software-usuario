@@ -51,7 +51,6 @@ jobs:
         script: |
           docker stop usuario
           docker rm --force usuario
-
           docker run -d -p 8080:8080 \
             -e USER_DB=${{ secrets.USER_DB }} \
             -e PASS_DB=${{ secrets.PASS_DB }} \

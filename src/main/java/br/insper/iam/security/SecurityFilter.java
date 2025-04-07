@@ -32,8 +32,6 @@ public class SecurityFilter extends OncePerRequestFilter {
 
             Usuario usuario = loginService.validateToken(token);
 
-            request.getMethod()
-            if (usuario.getPapel().equals("ADMIN"))
             // response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Token inválido");
 
             filterChain.doFilter(request, response);

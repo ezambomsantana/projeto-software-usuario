@@ -3,6 +3,7 @@ package br.insper.iam.login;
 import br.insper.iam.usuario.Usuario;
 import br.insper.iam.usuario.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -16,7 +17,8 @@ public class LoginService {
     @Autowired
     private UsuarioService usuarioService;
 
-    private HashMap<String, Usuario> tokens = new HashMap<>();
+    @Autowired
+    private RedisTemplate<String, Usuario> tokens;
 
     public String login(LoginDTO loginDTO) {
 
@@ -25,15 +27,16 @@ public class LoginService {
 
         String token = UUID.randomUUID().toString();
 
-        tokens.put(token, usuario);
+        tokens.opsForValue().set(token, usuario);
 
         return token;
 
     }
 
-    public void validateToken(String token) {
-        if (!tokens.containsKey(token)) {
+    public Usuario validateToken(String token) {
+        if (tokens.opsForValue().get(token) == null) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
         }
+        return tokens.opsForValue().get(token);
     }
 }

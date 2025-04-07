@@ -1,6 +1,7 @@
 package br.insper.iam.security;
 
 import br.insper.iam.login.LoginService;
+import br.insper.iam.usuario.Usuario;
 import br.insper.iam.usuario.UsuarioService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -29,7 +30,10 @@ public class SecurityFilter extends OncePerRequestFilter {
         } else {
             String token = request.getHeader("Authorization");
 
-            loginService.validateToken(token);
+            Usuario usuario = loginService.validateToken(token);
+
+            request.getMethod()
+            if (usuario.getPapel().equals("ADMIN"))
             // response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Token inválido");
 
             filterChain.doFilter(request, response);

@@ -54,4 +54,4 @@ jobs:
             -e PASS_DB=${{ secrets.PASS_DB }} \
             -e PATH_DB=${{ secrets.PATH_DB }} \
             -e NAME_DB=${{ secrets.NAME_DB }} \
-            --name usuario --network=rede ezambomsantana/usuario-ci:${{ github.sha }}
+            --name usuario --network=rede aaninhabc/usuario-ci:${{ github.sha }}

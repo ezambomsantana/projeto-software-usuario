@@ -8,6 +8,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -25,15 +26,16 @@ public class SecurityFilter extends OncePerRequestFilter {
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
         String path = request.getRequestURI();
-        if (path.equals("/api/login")) {
+        String method = request.getMethod();
+
+        if (path.equals("/api/usuario") && method.equals(HttpMethod.POST.name())) {
+            filterChain.doFilter(request, response);
+        } else if (path.equals("/api/login")) {
             filterChain.doFilter(request, response);
         } else {
             String token = request.getHeader("Authorization");
 
-            Usuario usuario = loginService.validateToken(token);
-
-            // response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Token inválido");
-
+            loginService.validateToken(token);
             filterChain.doFilter(request, response);
         }
     }
